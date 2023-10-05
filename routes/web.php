@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('/login', [HomeController::class, 'viewLogin'])->name('loginPage');
+Route::get('/register', [HomeController::class, 'viewRegister'])->name('registerPage');

@@ -3,8 +3,8 @@
     <div class="text-center">
         <h2 class="mb-5">Please login or register</h2>
         <div class="flex gap-2 items-center justify-center">
-            <button class="btn btn-success">Login</button>
-            <button class="btn btn-info">Register</button>
+            <a class="btn btn-success" href={{ route('loginPage') }}>Login</a>
+            <a class="btn btn-info" href={{ route('registerPage') }}>Register</a>
         </div>
     </div>
 @endsection
