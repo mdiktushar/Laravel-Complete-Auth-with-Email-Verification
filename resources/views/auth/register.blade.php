@@ -8,7 +8,7 @@
                 <label class="label">
                     <span class="label-text">First Name</span>
                 </label>
-                <input type="text" name="firstName" placeholder="Type here"
+                <input type="text" name="firstName" value={{ old('firstName') }} placeholder="Type here"
                     class="input input-bordered w-full max-w-xs @error('firstName') border-red-600 placeholder-red-500 @enderror " />
                 @error('firstName')
                     <p class="text-red-600 text-xs">{{ $message }}</p>
@@ -18,7 +18,7 @@
                 <label class="label">
                     <span class="label-text">Last Name</span>
                 </label>
-                <input type="text" name="lastName" placeholder="Type here"
+                <input type="text" name="lastName" value={{ old('lastName') }} placeholder="Type here"
                     class="input input-bordered w-full max-w-xs @error('lastName') border-red-600 placeholder-red-500 @enderror " />
                 @error('lastName')
                     <p class="text-red-600 text-xs">{{ $message }}</p>
@@ -29,7 +29,7 @@
             <label class="label">
                 <span class="label-text">Email</span>
             </label>
-            <input type="text" name="email" placeholder="Type here"
+            <input type="text" name="email" value={{ old('email') }} placeholder="Type here"
                 class="input input-bordered w-full max-w-xs @error('email') border-red-600 placeholder-red-500 @enderror " />
             @error('email')
                 <p class="text-red-600 text-xs">{{ $message }}</p>
@@ -40,7 +40,7 @@
                 <label class="label">
                     <span class="label-text">Password</span>
                 </label>
-                <input type="password" name="password" placeholder="Type here"
+                <input type="password" name="password" value={{ old('password') }} placeholder="Type here"
                     class="input input-bordered w-full max-w-xs @error('password') border-red-600 placeholder-red-500 @enderror " />
                 @error('password')
                     <p class="text-red-600 text-xs">{{ $message }}</p>
@@ -50,7 +50,8 @@
                 <label class="label">
                     <span class="label-text">Confirm Password</span>
                 </label>
-                <input type="password" name="password_confirmation" placeholder="Type here"
+                <input type="password" name="password_confirmation" value={{ old('password_confirmation') }}
+                    placeholder="Type here"
                     class="input input-bordered w-full max-w-xs @error('password') border-red-600 placeholder-red-500 @enderror " />
                 @error('password')
                     <p class="text-red-600 text-xs">{{ $message }}</p>
