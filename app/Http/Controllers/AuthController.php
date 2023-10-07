@@ -27,19 +27,19 @@ class AuthController extends Controller
                 ]
             ]
         );
-
+        
         $body = json_decode((string)$response->getBody());
 
         if ($body->success == true) {
             $user = User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
+                'first_name' => $request->firstName,
+                'last_name' => $request->lastName,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'email_verified_code' => Str::random(40)
+                'email_verified_code' => Str::random(40),
             ]);
-
-            return redirect()->back()->with('success', 'Registration successfull.Please check your email address for email verification link.');
+            session()->flash('success', 'Registration successfull.Please check your email address for email verification link.');
+            return redirect()->back();
         } else {
             return redirect()->back()->with('error', 'Invalid Recaptcha');
         }
