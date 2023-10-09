@@ -40,7 +40,7 @@ class EmailVerificationMail extends Mailable
         return new Content(
             markdown: 'emails.auth.email_verificaton_mail',
             with: [
-                'user' => $this->user,
+                'url' => $this->user->verification_code,
             ]
         );
     }

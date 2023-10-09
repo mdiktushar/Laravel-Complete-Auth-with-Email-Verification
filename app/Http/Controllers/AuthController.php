@@ -44,9 +44,10 @@ class AuthController extends Controller
             session()->flash('success', 'Registration successfull. Please check your email address for email verification link.');
             Mail::to($request->email)->send(new EmailVerificationMail($user));
             
-            return redirect()->back();
+            return redirect()->route('registerPage');
         } else {
-            return redirect()->back()->with('error', 'Invalid Recaptcha');
+            session()->flash('error', 'Invalid Recaptcha');
+            return redirect()->route('registerPage');
         }
     }
 
