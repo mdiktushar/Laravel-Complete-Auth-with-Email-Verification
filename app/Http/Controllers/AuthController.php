@@ -67,7 +67,7 @@ class AuthController extends Controller
             session()->flash('error', 'Not Verified');
             return redirect()->route('registerPage');
         } else {
-            if($user->$email_verified_at) {
+            if($user->email_verified_at) {
                 session()->flash('error', 'Already Verified');
                 return redirect()->route('registerPage');
             } else {

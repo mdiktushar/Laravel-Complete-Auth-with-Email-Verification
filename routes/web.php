@@ -24,4 +24,4 @@ Route::get('/register', [HomeController::class, 'viewRegister'])->name('register
 Route::post('/user-register', [AuthController::class, 'register'])->name('register');
 Route::post('/user-login', [AuthController::class, 'login'])->name('login');
 
-Route::patch('/auth/verify-email/{verification_code}', [AuthController::class, 'verify_email'])->name('verify_email');
+Route::get('/auth/verify-email/{verification_code}', [AuthController::class, 'verify_email'])->name('verify_email');
