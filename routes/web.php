@@ -19,6 +19,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('/login', [HomeController::class, 'viewLogin'])->name('loginPage');
 Route::get('/register', [HomeController::class, 'viewRegister'])->name('registerPage');
+Route::get('/dashboard', [HomeController::class, 'viewDashboard'])->name('dashboardPage');
 
 
 Route::post('/user-register', [AuthController::class, 'register'])->name('register');

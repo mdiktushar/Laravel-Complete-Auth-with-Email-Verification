@@ -51,15 +51,6 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'recapture' => 'required'
-        ]);
-    }
-
     public function verify_email ($verification_code) {
         $user = User::where('email_verified_code', $verification_code)->first();
 
@@ -72,12 +63,63 @@ class AuthController extends Controller
                 return redirect()->route('registerPage');
             } else {
                 $user->update([
-                    'email_verified_at'=> Carbon::now()
+                    'email_verified_at'=> Carbon::now(),
+                    'is_active' => true
                 ]);
                 session()->flash('success', 'Verified');
                 return redirect()->route('registerPage');
             }
 
+        }
+    }
+
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'recapture' => 'required'
+        ]);
+
+        $grecaptcha = $request->required;
+
+        $client = new Client();
+
+        $response = $client->post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            [
+                'form_params' => [
+                    'secret' => env('reCAPTCHA_secret_key'),
+                    'response' => $grecaptcha
+                ]
+            ]
+        );
+        $body = json_decode((string)$response->getBody());
+
+        if ($body->success == true) {
+            $user = User::where('email', $request->email)->first();
+
+            if(!$user) {
+                session()->flash('error', 'Email not found!');
+                return redirect()->route('loginPage');
+            } else {
+                if (!$user->email_verified_at) {
+                    session()->flash('error', 'User is not verified');
+                    return redirect()->back();
+                } else {
+                    if(auth()->attempt($request->only('email', 'password'))) {
+                        
+                        return redirect()->route('dashboardPage');
+                    } else {
+                        session()->flash('error', 'Password is not correct');
+                        return redirect()->back();
+                    }
+                }
+            }
+        } else {
+            session()->flash('error', 'Invalid Recaptcha');
+            return redirect()->back();
         }
     }
 }
