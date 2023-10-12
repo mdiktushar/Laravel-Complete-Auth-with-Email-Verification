@@ -124,6 +124,11 @@ class AuthController extends Controller
         }
     }
 
+    public function forgerPassword () {
+        return view('auth.forgetPassword');
+
+    }
+
 
     public function logout () {
         Auth::logout();

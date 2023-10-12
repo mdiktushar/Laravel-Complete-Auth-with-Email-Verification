@@ -1,6 +1,6 @@
 @extends('Layout.mainLayout')
 @section('body')
-    <h1 class="text-center">Login</h1>
+    <h1>Forget Password</h1>
     @if (session('success'))
         <div class="alert alert-success">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -19,9 +19,9 @@
             <span>{{ session('error') }}</span>
         </div>
     @endif
+
     <form action={{ route('login') }} method="POST" class="flex flex-col items-center">
         @csrf
-
         <div class="form-control w-full max-w-xs">
             <label class="label">
                 <span class="label-text">Email</span>
@@ -32,39 +32,8 @@
                 <p class="text-red-600 text-xs">{{ $message }}</p>
             @enderror
         </div>
-        <div class="form-control w-full max-w-xs">
-            <label class="label">
-                <span class="label-text">Password</span>
-            </label>
-            <input type="password" name="password" value={{ old('password') }} placeholder="Type here"
-                class="input input-bordered w-full max-w-xs @error('password') border-red-600 placeholder-red-500 @enderror " />
-            @error('password')
-                <p class="text-red-600 text-xs">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="g-recaptcha mt-5" data-sitekey="{{ env('reCAPTCHA_site_key') }}" data-callback="onCaptchaSuccess"
-            data-expired-callback="onCaptchaExpired">
-        </div>
-        @error('recapture')
-            <p class="text-red-600 text-xs">Prove your are not a robort</p>
-        @enderror
-        <input type="hidden" name="recapture" id="recaptudre">
-        <button type="submit" class="btn btn-success mt-5">Success</button>
+        <button type="submit" class="btn btn-success mt-5">Send OTP</button>
         <br>
-        <a href={{ route('forgerPassword') }} class="btn text-red-500">Forget Password</a>
+        <a href={{ route('loginPage') }} class="btn text-green-500">Got TO Login</a>
     </form>
-
-    
-
-    <script>
-        function onCaptchaSuccess(response) {
-            var inputElement = document.getElementById("recaptudre");
-            inputElement.value = response;
-        }
-
-        function onCaptchaExpired() {
-            var inputElement = document.getElementById("recaptudre");
-            inputElement.value = '';
-        }
-    </script>
 @endsection

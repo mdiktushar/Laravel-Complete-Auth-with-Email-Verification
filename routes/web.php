@@ -25,6 +25,8 @@ Route::post('/user-login', [AuthController::class, 'login'])->name('login');
 Route::get('/auth/verify-email/{verification_code}', [AuthController::class, 'verify_email'])->name('verify_email');
 
 
+Route::get('/forger-password', [AuthController::class, 'forgerPassword'])->name('forgerPassword');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'viewDashboard'])->name('dashboardPage');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
