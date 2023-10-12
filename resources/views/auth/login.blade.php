@@ -50,7 +50,11 @@
         @enderror
         <input type="hidden" name="recapture" id="recaptudre">
         <button type="submit" class="btn btn-success mt-5">Success</button>
+        <br>
+        <a href="" class="btn text-red-500">Forget Password</a>
     </form>
+
+    
 
     <script>
         function onCaptchaSuccess(response) {
