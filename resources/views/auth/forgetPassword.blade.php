@@ -26,7 +26,7 @@
             <label class="label">
                 <span class="label-text">Email</span>
             </label>
-            <input type="text" name="email" value={{ old('email') }} placeholder="Type here"
+            <input type="text" name="email" placeholder="Type here"
                 class="input input-bordered w-full max-w-xs @error('email') border-red-600 placeholder-red-500 @enderror " />
             @error('email')
                 <p class="text-red-600 text-xs">{{ $message }}</p>
