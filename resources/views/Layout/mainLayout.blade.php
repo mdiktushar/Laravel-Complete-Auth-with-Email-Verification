@@ -56,7 +56,12 @@
                 </ul>
             </div>
             <div class="navbar-end">
-                <a class="btn">Button</a>
+                @auth
+                    <a class="btn" href={{route('logout')}}>Logout</a>
+                @endauth
+                @guest
+                    <a class="btn">Login</a>
+                @endguest
             </div>
         </div>
     </header>

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
@@ -121,5 +122,11 @@ class AuthController extends Controller
             session()->flash('error', 'Invalid Recaptcha');
             return redirect()->back();
         }
+    }
+
+
+    public function logout () {
+        Auth::logout();
+        return redirect('/');
     }
 }
