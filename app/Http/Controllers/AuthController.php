@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Mail\EmailVerificationMail;
+use App\Mail\ForgetPassword;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -131,6 +132,10 @@ class AuthController extends Controller
 
     public function sendForgetPasswordEmail (Request $request) {
 
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
@@ -139,8 +144,12 @@ class AuthController extends Controller
         }
 
         $OTP =  rand(1111, 9999);
+
+        $user->update([
+            'OTP' => $OTP,
+        ]);
         session()->flash('success', 'Please Check Your Email');
-        // Mail::to($request->email)->send(new EmailVerificationMail($OTP));
+        Mail::to($request->email)->send(new ForgetPassword($OTP, $user));
         return redirect()->back();
     }
 
