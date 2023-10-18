@@ -150,7 +150,7 @@ class AuthController extends Controller
         ]);
         session()->flash('success', 'Please Check Your Email');
         Mail::to($request->email)->send(new ForgetPassword($OTP, $user));
-        return redirect()->back();
+        return view('auth.resetPassword');
     }
 
 
