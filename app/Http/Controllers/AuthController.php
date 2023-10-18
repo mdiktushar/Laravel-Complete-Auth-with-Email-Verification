@@ -129,6 +129,21 @@ class AuthController extends Controller
 
     }
 
+    public function sendForgetPasswordEmail (Request $request) {
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            session()->flash('error', 'No account with this email');
+            return redirect()->back();
+        }
+
+        $OTP =  rand(1111, 9999);
+        session()->flash('success', 'Please Check Your Email');
+        // Mail::to($request->email)->send(new EmailVerificationMail($OTP));
+        return redirect()->back();
+    }
+
 
     public function logout () {
         Auth::logout();
