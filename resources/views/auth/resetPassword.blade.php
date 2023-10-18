@@ -22,13 +22,24 @@
 
 
     <div class="text-center">
-        <form action={{ route('sendForgetPasswordEmail') }} method="POST" class="flex flex-col items-center">
+        <form action={{ route('resetPassword') }} method="POST" class="flex flex-col items-center">
             @csrf
+            <input type="text" value={{$email}} name="email" value={{ old('email') }} id="">
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
+                    <span class="label-text">OTP</span>
+                </label>
+                <input type="text" name="OTP" placeholder="Type here"
+                    class="input input-bordered w-full max-w-xs @error('OTP') border-red-600 placeholder-red-500 @enderror " />
+                @error('OTP')
+                    <p class="text-red-600 text-xs">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="form-control w-full max-w-xs">
                 <label class="label">
                     <span class="label-text">Password</span>
                 </label>
-                <input type="password" name="password" value={{ old('password') }} placeholder="Type here"
+                <input type="password" name="password" placeholder="Type here"
                     class="input input-bordered w-full max-w-xs @error('password') border-red-600 placeholder-red-500 @enderror " />
                 @error('password')
                     <p class="text-red-600 text-xs">{{ $message }}</p>

@@ -150,7 +150,23 @@ class AuthController extends Controller
         ]);
         session()->flash('success', 'Please Check Your Email');
         Mail::to($request->email)->send(new ForgetPassword($OTP, $user));
-        return view('auth.resetPassword');
+        return view('auth.resetPassword', ['email' => $user->email]);
+    }
+
+
+    public function resetPassword(Request $request) {
+        // dd($request->all());
+        $request->validate([
+            'OTP' => "required",
+            'password' => "required|confirmed",
+        ]);
+        $user = User::where('email', $request->email)->first();
+        $user->update([
+            // 'password' => bcrypt($request->password),
+            'password' => $request->password
+        ]);
+        session()->flash('success', 'Password is chainged Please login.');
+        return redirect()->route('loginPage');
     }
 
 

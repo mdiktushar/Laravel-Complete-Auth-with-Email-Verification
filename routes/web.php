@@ -26,7 +26,8 @@ Route::get('/auth/verify-email/{verification_code}', [AuthController::class, 've
 
 
 Route::get('/forger-password', [AuthController::class, 'forgerPassword'])->name('forgerPassword');
-Route::post('/forger-password-email', [AuthController::class, 'sendForgetPasswordEmail'])->name('sendForgetPasswordEmail');
+Route::post('/sendForgetPasswordEamil', [AuthController::class, 'sendForgetPasswordEmail'])->name('sendForgetPasswordEmail');
+Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'viewDashboard'])->name('dashboardPage');
