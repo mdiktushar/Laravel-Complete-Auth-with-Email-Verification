@@ -1,11 +1,8 @@
 <x-mail::message>
 # Introduction
 
-The body of your message.
-
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+Hello User {{$name}}. <br>
+This is your OTP: {{$OTP}}.
 
 Thanks,<br>
 {{ config('app.name') }}
